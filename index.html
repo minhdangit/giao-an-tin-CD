@@ -5,10 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- === SEO & META TAGS === -->
-    <title>Cổng Giáo án Tương tác Tin học - Đăng Lee</title>
-    <meta name="description" content="Hệ thống bài giảng, bài tập tương tác Tin học từ lớp 3-9 và chia sẻ thủ thuật IT cùng Thầy Đăng Lee.">
-    <meta name="keywords" content="tin học, giáo án điện tử, học tin học online, Đăng Lee, tiktok ongthaycaiwin, luyện gõ 10 ngón">
-    <meta name="author" content="Đăng Lee">
+    <title>E- learning Tin học cùng thầy Đăng</title>
+    <meta name="description" content="Hệ thống bài giảng, bài tập tương tác Tin học từ lớp 3-9 và chia sẻ thủ thuật IT cùng Thầy Minh Đăng.">
+    <meta name="keywords" content="tin học, giáo án điện tử, học tin học online, Minh Đăng, tiktok ongthaycaiwin, luyện gõ 10 ngón">
+    <meta name="author" content="Minh Đăng">
     <link rel="canonical" href="https://tinhoc.leminhdang.com/">
     <link rel="icon" type="image/png" href="favicon.png">
     
@@ -17,45 +17,69 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- === CSS TÙY CHỈNH (LIGHT MODE) === -->
+    <!-- === CSS TÙY CHỈNH === -->
     <style>
         /* --- CÀI ĐẶT MÀU SẮC --- */
         :root {
-            --theme-blue: #002060; /* Xanh đậm chủ đạo */
+            --theme-blue: #002060;
             --theme-red: #C00000;
-            --bg-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); /* Nền sáng sạch */
-            --card-bg: rgba(255, 255, 255, 0.85);
+            --bg-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%);
         }
 
         body {
             font-family: 'Inter', sans-serif;
             background-image: var(--bg-gradient);
             background-attachment: fixed;
-            color: #334155; /* Chữ màu xám đậm dễ đọc trên nền sáng */
+            color: #334155;
             overflow-x: hidden;
         }
 
-        /* [MỚI] Footer Xanh Đậm Nổi Bật */
+        /* --- FOOTER VỚI HIỆU ỨNG GRID CHẠY --- */
         footer {
-            background: linear-gradient(to right, #002060, #003399);
-            color: white; /* Chữ trắng trên nền footer tối */
-            box-shadow: 0 -10px 25px rgba(0, 32, 96, 0.15);
+            background-color: #001233;
+            color: white;
             position: relative;
             z-index: 50;
-            margin-top: auto; /* Đẩy footer xuống đáy nếu nội dung ngắn */
+            overflow: hidden;
+            box-shadow: 0 -10px 30px rgba(0, 32, 96, 0.3);
         }
 
-        #particles-container {
-            position: fixed;
-            width: 100%;
-            height: 100%;
+        .footer-grid-bg {
+            position: absolute;
             top: 0;
             left: 0;
-            z-index: -1;
+            width: 200%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.1) 1px, transparent 1px);
+            background-size: 40px 40px;
+            transform: perspective(500px) rotateX(60deg);
+            transform-origin: top center;
+            animation: grid-move 20s linear infinite;
+            z-index: 0;
+            opacity: 0.5;
             pointer-events: none;
         }
 
-        /* Class màu chữ riêng */
+        .footer-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, #001233 0%, transparent 40%, #001233 100%);
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        @keyframes grid-move {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(40px); }
+        }
+
+        .footer-content { position: relative; z-index: 10; }
+        #particles-container { position: fixed; width: 100%; height: 100%; top: 0; left: 0; z-index: -1; pointer-events: none; }
         .text-theme-blue { color: var(--theme-blue); }
         .text-theme-red { color: var(--theme-red); }
 
@@ -84,12 +108,12 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            background: rgba(255, 255, 255, 0.7); /* Nền trắng mờ */
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
@@ -100,7 +124,7 @@
             transform: translateY(-8px) scale(1.02);
             background: #ffffff;
             border-color: var(--theme-blue);
-            box-shadow: 0 20px 25px -5px rgba(0, 32, 96, 0.15), 0 8px 10px -6px rgba(0, 32, 96, 0.1);
+            box-shadow: 0 20px 25px -5px rgba(0, 32, 96, 0.15);
         }
 
         .grade-card-new:hover .grade-icon {
@@ -110,7 +134,6 @@
 
         .grade-icon { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-        /* Hiệu ứng Shine */
         .grade-card-new::after {
             content: '';
             position: absolute;
@@ -163,7 +186,7 @@
         
         <div class="relative inline-block mb-10">
             <h1 class="text-4xl sm:text-6xl font-extrabold text-theme-blue tracking-tight">
-                Cổng Giáo Án <span class="text-theme-red relative">Tương Tác
+                E-Learning cùng <span class="text-theme-red relative">Thầy Đăng
                 <!-- Gạch chân -->
                 <svg class="absolute w-full h-3 -bottom-1 left-0 text-yellow-400 opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" /></svg>
                 </span>
@@ -179,7 +202,7 @@
         <!-- === KHU VỰC LIÊN HỆ & ỦNG HỘ === -->
         <section class="mt-20 text-left">
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Box Thông tin (Nền trắng nổi bật) -->
+                <!-- Box Thông tin -->
                 <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:shadow-xl transition-shadow duration-300">
                     <h2 class="text-2xl font-bold text-theme-blue mb-6 border-b pb-2 flex items-center gap-3">
                         <i class="fas fa-address-card"></i> Liên Hệ Thầy Đăng
@@ -219,23 +242,37 @@
         </section>
     </main>
     
-    <!-- === FOOTER (ĐẬM MÀU ĐỂ NỔI BẬT TRÊN NỀN SÁNG) === -->
-    <footer class="w-full text-white mt-20 z-10">
-        <!-- Viền trang trí -->
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-yellow-400 to-red-500"></div>
+    <!-- === FOOTER (HIỆU ỨNG GRID CHẠY) === -->
+    <footer class="w-full text-white mt-20">
+        <!-- Background Grid Animation -->
+        <div class="footer-grid-bg"></div>
+        <div class="footer-overlay"></div>
         
-        <div class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Nội dung chính nằm trên Grid -->
+        <div class="max-w-7xl mx-auto px-6 py-12 footer-content">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
                 <!-- Cột 1 -->
                 <div class="space-y-5">
-                    <h3 class="font-bold text-2xl flex items-center justify-center md:justify-start gap-2 text-yellow-300">
-                        <i class="fas fa-laptop-code"></i> Đăng Lee IT
-                    </h3>
+                    <!-- [CẬP NHẬT] Logo được đặt cạnh tiêu đề Minh Đăng IT -->
+                    <a href="https://dichvu.leminhdang.com/" target="_blank" class="group inline-flex items-center justify-center md:justify-start gap-4">
+                        <!-- Hộp chứa Logo (Glass Effect) -->
+                        <div class="h-14 w-14 bg-white/10 backdrop-blur-md rounded-xl flex items-center justify-center border border-white/20 shadow-lg group-hover:bg-white/20 group-hover:scale-110 transition-all duration-300">
+                            <img src="logo.png" alt="Logo Minh Đăng IT" class="h-10 w-auto object-contain" onerror="this.src='https://placehold.co/40x40/ffffff/000000?text=Logo'">
+                        </div>
+                        
+                        <!-- Tiêu đề -->
+                        <h3 class="font-bold text-2xl text-yellow-300 group-hover:text-yellow-100 transition-colors relative">
+                            Minh Đăng IT
+                            <!-- Gạch chân trang trí -->
+                            <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-yellow-300 group-hover:w-full transition-all duration-300"></span>
+                        </h3>
+                    </a>
+
                     <p class="text-blue-100 text-sm leading-relaxed">
                         Nơi chia sẻ kiến thức Tin học và những thủ thuật công nghệ hữu ích cho mọi lứa tuổi.
                     </p>
                     
-                    <a href="https://www.tiktok.com/@ongthaycaiwin" target="_blank" class="inline-flex items-center gap-3 bg-black hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all transform hover:-translate-y-1 hover:shadow-lg border border-gray-700 group mt-2">
+                    <a href="https://www.tiktok.com/@ongthaycaiwin" target="_blank" class="inline-flex items-center gap-3 bg-black hover:bg-gray-900 text-white px-5 py-3 rounded-xl transition-all transform hover:-translate-y-1 hover:shadow-lg border border-gray-700 group mt-2">
                         <i class="fa-brands fa-tiktok text-2xl tiktok-effect group-hover:text-pink-500"></i>
                         <div class="text-left">
                             <div class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Follow ngay</div>
@@ -270,8 +307,10 @@
                     </div>
                 </div>
             </div>
-            <div class="border-t border-white/20 mt-10 pt-6 text-center text-sm text-blue-200">
-                &copy; 2025 Bản quyền thuộc về Đăng Lee. Website phục vụ giáo dục phi lợi nhuận.
+            
+            <!-- [LIÊN KẾT] Bản quyền -->
+            <div class="border-t border-white/20 mt-10 pt-6 flex flex-col sm:flex-row items-center justify-center gap-4 text-center text-sm text-blue-200">
+                <span>&copy; 2025 <a href="https://dichvu.leminhdang.com/" target="_blank" class="font-bold text-yellow-300 hover:text-white hover:underline">Minh Đăng</a>. Website phục vụ giáo dục phi lợi nhuận.</span>
             </div>
         </div>
     </footer>
@@ -279,8 +318,8 @@
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
     <script>
         const cardData = [
-            { type: 'icon', icon: 'fas fa-keyboard', title: 'Luyện gõ chữ', href: 'luyen-go-chu/index.html', description: 'Rèn kỹ năng 10 ngón' },
-            { type: 'image', icon: 'canva.png', title: 'Tài liệu Canva', href: 'canva/index.html', badge: 'MỚI', description: 'Thiết kế sáng tạo'},
+            { type: 'icon', icon: 'fas fa-keyboard', title: 'Luyện gõ chữ', href: 'luyen-go-chu/index.html', description: 'Rèn kỹ năng 10 ngón'},
+            { type: 'image', icon: 'canva.png', title: 'Tài liệu Canva', href: 'canva/index.html', badge: 'MỚI', description: 'Thiết kế sáng tạo', highlight: true },
             { type: 'icon', icon: 'fas fa-child', title: 'Lớp 3', href: 'khoi3/index.html' },
             { type: 'icon', icon: 'fas fa-child-reaching', title: 'Lớp 4', href: 'khoi4/index.html' },
             { type: 'icon', icon: 'fa-solid fa-people-pulling', title: 'Lớp 5', href: 'khoi5/index.html' },
@@ -294,8 +333,7 @@
                 icon: 'fas fa-graduation-cap', 
                 title: 'Ôn thi HK1', 
                 href: 'onthi/hki.html', 
-                description: 'Trắc nghiệm & Thực hành',
-                highlight: true
+                description: 'Trắc nghiệm & Thực hành'
             },
             { type: 'icon', icon: 'fas fa-tools', title: 'Dịch vụ IT', href: 'https://dichvu.leminhdang.com/', target: '_blank', description: 'Sửa chữa & Cài đặt', colorClass: 'text-red-600' },
         ];
