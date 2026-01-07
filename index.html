@@ -17,19 +17,32 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     
-    <!-- === CSS ĐƯỢC TÍCH HỢP TRỰC TIẾP ĐỂ TRÁNH LỖI CACHE === -->
+    <!-- === CSS TÙY CHỈNH (LIGHT MODE) === -->
     <style>
-        /* --- CÀI ĐẶT CHUNG --- */
+        /* --- CÀI ĐẶT MÀU SẮC --- */
         :root {
-            --theme-blue: #002060;
+            --theme-blue: #002060; /* Xanh đậm chủ đạo */
             --theme-red: #C00000;
-            --gradient-bg: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
+            --bg-gradient: linear-gradient(120deg, #fdfbfb 0%, #ebedee 100%); /* Nền sáng sạch */
+            --card-bg: rgba(255, 255, 255, 0.85);
         }
 
         body {
             font-family: 'Inter', sans-serif;
-            background: var(--gradient-bg);
-            overflow-x: hidden; /* Tránh thanh cuộn ngang không mong muốn */
+            background-image: var(--bg-gradient);
+            background-attachment: fixed;
+            color: #334155; /* Chữ màu xám đậm dễ đọc trên nền sáng */
+            overflow-x: hidden;
+        }
+
+        /* [MỚI] Footer Xanh Đậm Nổi Bật */
+        footer {
+            background: linear-gradient(to right, #002060, #003399);
+            color: white; /* Chữ trắng trên nền footer tối */
+            box-shadow: 0 -10px 25px rgba(0, 32, 96, 0.15);
+            position: relative;
+            z-index: 50;
+            margin-top: auto; /* Đẩy footer xuống đáy nếu nội dung ngắn */
         }
 
         #particles-container {
@@ -39,9 +52,10 @@
             top: 0;
             left: 0;
             z-index: -1;
-            pointer-events: none; /* Để chuột xuyên qua lớp hạt click được nội dung bên dưới */
+            pointer-events: none;
         }
 
+        /* Class màu chữ riêng */
         .text-theme-blue { color: var(--theme-blue); }
         .text-theme-red { color: var(--theme-red); }
 
@@ -51,10 +65,7 @@
             50% { transform: scale(1.1); filter: drop-shadow(2px 2px 0px #25F4EE) drop-shadow(-2px -2px 0px #FE2C55); }
             100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
         }
-
-        .tiktok-effect {
-            animation: tiktok-pulse 2s infinite;
-        }
+        .tiktok-effect { animation: tiktok-pulse 2s infinite; }
 
         /* --- ANIMATION LOAD TRANG --- */
         .fade-in-up {
@@ -62,15 +73,10 @@
             opacity: 0;
             transform: translateY(20px);
         }
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
+        @keyframes fadeInUp { to { opacity: 1; transform: translateY(0); } }
 
-        /* --- THẺ HỌC TẬP KIỂU GAME (GRADE CARD NEW) --- */
-        .grade-card-container {
-            perspective: 1000px; /* Tạo chiều sâu 3D */
-            height: 100%;
-        }
+        /* --- THẺ HỌC TẬP (LIGHT GLASS) --- */
+        .grade-card-container { perspective: 1000px; height: 100%; }
 
         .grade-card-new {
             display: flex;
@@ -78,23 +84,21 @@
             align-items: center;
             justify-content: center;
             height: 100%;
-            background: rgba(255, 255, 255, 0.8); /* Tăng độ đậm nền một chút */
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.7); /* Nền trắng mờ */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
             border-radius: 1.5rem;
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nhún nhảy */
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            cursor: pointer;
             text-decoration: none;
         }
 
-        /* Hiệu ứng khi rê chuột vào thẻ */
         .grade-card-new:hover {
             transform: translateY(-8px) scale(1.02);
-            background: rgba(255, 255, 255, 1);
+            background: #ffffff;
             border-color: var(--theme-blue);
             box-shadow: 0 20px 25px -5px rgba(0, 32, 96, 0.15), 0 8px 10px -6px rgba(0, 32, 96, 0.1);
         }
@@ -104,11 +108,9 @@
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
         }
 
-        .grade-icon {
-            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
+        .grade-icon { transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
 
-        /* Hiệu ứng ánh sáng quét qua (Shine Effect) */
+        /* Hiệu ứng Shine */
         .grade-card-new::after {
             content: '';
             position: absolute;
@@ -116,18 +118,14 @@
             left: -100%;
             width: 50%;
             height: 100%;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
             transform: skewX(-25deg);
             transition: 0.5s;
             pointer-events: none;
         }
+        .grade-card-new:hover::after { left: 125%; transition: 0.7s ease-in-out; }
 
-        .grade-card-new:hover::after {
-            left: 125%;
-            transition: 0.7s ease-in-out;
-        }
-
-        /* --- HUY HIỆU (BADGE) --- */
+        /* --- BADGE HOT --- */
         .badge-hot-new {
             background: linear-gradient(45deg, #FF416C, #FF4B2B);
             color: white;
@@ -142,9 +140,7 @@
             animation: pulse-badge 1.5s infinite;
             z-index: 10;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
-
         @keyframes pulse-badge {
             0% { transform: scale(1); }
             50% { transform: scale(1.05); }
@@ -162,47 +158,47 @@
         
         <!-- Logo & Header -->
         <a href="index.html" class="inline-block hover:opacity-80 transition-opacity">
-            <img src="logo.png" alt="Minh Đăng IT Logo" class="h-24 sm:h-32 w-auto mx-auto mb-4 drop-shadow-xl" onerror="this.src='https://placehold.co/200x100/002060/FFFFFF?text=Dang+Lee+IT'; this.onerror=null;">
+            <img src="logo.png" alt="Minh Đăng IT Logo" class="h-24 sm:h-32 w-auto mx-auto mb-4 drop-shadow-md" onerror="this.src='https://placehold.co/200x100/002060/FFFFFF?text=Dang+Lee+IT'; this.onerror=null;">
         </a>
         
         <div class="relative inline-block mb-10">
             <h1 class="text-4xl sm:text-6xl font-extrabold text-theme-blue tracking-tight">
                 Cổng Giáo Án <span class="text-theme-red relative">Tương Tác
-                <!-- Gạch chân kiểu vẽ tay -->
-                <svg class="absolute w-full h-3 -bottom-1 left-0 text-yellow-400 opacity-60" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" /></svg>
+                <!-- Gạch chân -->
+                <svg class="absolute w-full h-3 -bottom-1 left-0 text-yellow-400 opacity-80" viewBox="0 0 100 10" preserveAspectRatio="none"><path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="8" fill="none" /></svg>
                 </span>
             </h1>
             <p class="text-lg sm:text-xl text-slate-600 mt-4 font-medium">Học vui - Hiểu nhanh - Thực hành giỏi</p>
         </div>
 
-        <!-- === LƯỚI DANH MỤC (Sẽ được Render bởi JS) === -->
+        <!-- === LƯỚI DANH MỤC === -->
         <div id="grade-grid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 px-2 sm:px-0">
-            <!-- JS sẽ điền nội dung vào đây -->
+            <!-- JS Render -->
         </div>
 
         <!-- === KHU VỰC LIÊN HỆ & ỦNG HỘ === -->
         <section class="mt-20 text-left">
             <div class="grid md:grid-cols-2 gap-8">
-                <!-- Box Thông tin -->
-                <div class="bg-white/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white/50 hover:shadow-2xl transition-shadow duration-300">
+                <!-- Box Thông tin (Nền trắng nổi bật) -->
+                <div class="bg-white p-8 rounded-3xl shadow-lg border border-slate-100 hover:shadow-xl transition-shadow duration-300">
                     <h2 class="text-2xl font-bold text-theme-blue mb-6 border-b pb-2 flex items-center gap-3">
                         <i class="fas fa-address-card"></i> Liên Hệ Thầy Đăng
                     </h2>
                     <div class="space-y-5 text-slate-700 font-medium">
                         <div class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-blue-50 flex items-center justify-center mr-4 group-hover:bg-blue-600 transition-colors">
                                 <i class="fas fa-map-marker-alt text-blue-600 group-hover:text-white transition-colors"></i>
                             </div>
                             <span>Càng Long, Vĩnh Long</span>
                         </div>
                         <div class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center mr-4 group-hover:bg-green-600 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-green-50 flex items-center justify-center mr-4 group-hover:bg-green-600 transition-colors">
                                 <i class="fas fa-phone text-green-600 group-hover:text-white transition-colors"></i>
                             </div>
                             <a href="tel:0899977870" class="hover:text-theme-red hover:underline decoration-2 underline-offset-2">089 99 77 870</a>
                         </div>
                         <div class="flex items-center group">
-                            <div class="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center mr-4 group-hover:bg-red-600 transition-colors">
+                            <div class="w-10 h-10 rounded-full bg-red-50 flex items-center justify-center mr-4 group-hover:bg-red-600 transition-colors">
                                 <i class="fas fa-envelope text-red-600 group-hover:text-white transition-colors"></i>
                             </div>
                             <a href="mailto:danglee@leminhdang.com" class="hover:text-theme-red hover:underline decoration-2 underline-offset-2">danglee@leminhdang.com</a>
@@ -211,7 +207,7 @@
                 </div>
 
                 <!-- Box Ủng hộ -->
-                <div class="bg-gradient-to-br from-white/90 to-blue-50/90 backdrop-blur-md p-8 rounded-3xl shadow-xl border border-white/50 flex flex-col items-center justify-center text-center hover:shadow-2xl transition-shadow duration-300">
+                <div class="bg-gradient-to-br from-white to-blue-50 p-8 rounded-3xl shadow-lg border border-slate-100 flex flex-col items-center justify-center text-center hover:shadow-xl transition-shadow duration-300">
                     <h2 class="text-2xl font-bold text-theme-blue mb-3">Ủng hộ Dự án ❤️</h2>
                     <p class="text-slate-600 mb-6 text-sm px-4">Mọi sự ủng hộ giúp Thầy duy trì server và phát triển thêm nhiều bài học thú vị miễn phí.</p>
                     <div class="relative group">
@@ -223,21 +219,23 @@
         </section>
     </main>
     
-    <!-- === FOOTER ĐÃ ĐƯỢC LÀM SÁNG RÕ === -->
-    <footer class="w-full text-white mt-20 z-10 bg-theme-blue relative overflow-hidden">
-        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-red-500 to-blue-400"></div>
+    <!-- === FOOTER (ĐẬM MÀU ĐỂ NỔI BẬT TRÊN NỀN SÁNG) === -->
+    <footer class="w-full text-white mt-20 z-10">
+        <!-- Viền trang trí -->
+        <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 via-yellow-400 to-red-500"></div>
         
         <div class="max-w-7xl mx-auto px-6 py-12">
             <div class="grid md:grid-cols-3 gap-10 text-center md:text-left">
-                <!-- Cột 1: Giới thiệu & TikTok Button -->
+                <!-- Cột 1 -->
                 <div class="space-y-5">
-                    <h3 class="font-bold text-2xl flex items-center justify-center md:justify-start gap-2 text-yellow-400">
+                    <h3 class="font-bold text-2xl flex items-center justify-center md:justify-start gap-2 text-yellow-300">
                         <i class="fas fa-laptop-code"></i> Đăng Lee IT
                     </h3>
-                    <p class="text-white text-sm leading-relaxed">Nơi chia sẻ kiến thức Tin học và những thủ thuật công nghệ hữu ích cho mọi lứa tuổi.</p>
+                    <p class="text-blue-100 text-sm leading-relaxed">
+                        Nơi chia sẻ kiến thức Tin học và những thủ thuật công nghệ hữu ích cho mọi lứa tuổi.
+                    </p>
                     
-                    <!-- Nút TikTok nổi bật -->
-                    <a href="https://www.tiktok.com/@ongthaycaiwin" target="_blank" class="inline-flex items-center gap-3 bg-black hover:bg-slate-900 text-white px-5 py-3 rounded-xl transition-all transform hover:translate-y-[-2px] hover:shadow-lg border border-slate-700 group">
+                    <a href="https://www.tiktok.com/@ongthaycaiwin" target="_blank" class="inline-flex items-center gap-3 bg-black hover:bg-gray-800 text-white px-5 py-3 rounded-xl transition-all transform hover:-translate-y-1 hover:shadow-lg border border-gray-700 group mt-2">
                         <i class="fa-brands fa-tiktok text-2xl tiktok-effect group-hover:text-pink-500"></i>
                         <div class="text-left">
                             <div class="text-[10px] text-gray-400 uppercase tracking-wider font-bold">Follow ngay</div>
@@ -246,41 +244,38 @@
                     </a>
                 </div>
 
-                <!-- Cột 2: Liên kết -->
+                <!-- Cột 2 -->
                 <div class="space-y-4">
-                    <h3 class="font-bold text-xl text-yellow-400">Lối Tắt</h3>
+                    <h3 class="font-bold text-xl text-yellow-300">Lối Tắt</h3>
                     <ul class="space-y-3 text-sm font-medium">
-                        <li><a href="#grade-grid" class="text-white hover:text-yellow-400 hover:pl-2 transition-all"><i class="fas fa-chevron-right text-xs mr-2"></i>Chọn Khối Lớp</a></li>
-                        <li><a href="https://dichvu.leminhdang.com/" target="_blank" class="text-white hover:text-yellow-400 hover:pl-2 transition-all"><i class="fas fa-chevron-right text-xs mr-2"></i>Dịch Vụ Sửa Máy Tính</a></li>
-                        <!-- [MỚI] Link Kiến Thức IT -->
-                        <li><a href="https://leminhdang.com/" target="_blank" class="text-white hover:text-yellow-400 hover:pl-2 transition-all"><i class="fas fa-chevron-right text-xs mr-2"></i>Kiến Thức IT</a></li>
+                        <li><a href="#grade-grid" class="text-blue-100 hover:text-white hover:pl-2 transition-all block"><i class="fas fa-chevron-right text-xs mr-2"></i>Chọn Khối Lớp</a></li>
+                        <li><a href="https://dichvu.leminhdang.com/" target="_blank" class="text-blue-100 hover:text-white hover:pl-2 transition-all block"><i class="fas fa-chevron-right text-xs mr-2"></i>Dịch Vụ Sửa Máy Tính</a></li>
+                        <li><a href="https://leminhdang.com/" target="_blank" class="text-blue-100 hover:text-white hover:pl-2 transition-all block"><i class="fas fa-chevron-right text-xs mr-2"></i>Kiến Thức IT</a></li>
                     </ul>
                 </div>
 
-                <!-- Cột 3: Mạng xã hội -->
+                <!-- Cột 3 -->
                 <div class="space-y-4">
-                    <h3 class="font-bold text-xl text-yellow-400">Kết Nối</h3>
+                    <h3 class="font-bold text-xl text-yellow-300">Kết Nối</h3>
                     <div class="flex justify-center md:justify-start space-x-4">
-                        <a href="https://www.facebook.com/danglee97" class="w-10 h-10 rounded-full bg-blue-600 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all transform hover:scale-110 shadow-lg border border-white/20">
-                            <i class="fab fa-facebook-f text-white hover:text-blue-600"></i>
+                        <a href="https://www.facebook.com/danglee97" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-blue-600 transition-all transform hover:scale-110 shadow-lg border border-white/20">
+                            <i class="fab fa-facebook-f text-lg"></i>
                         </a>
-                        <a href="https://www.tiktok.com/@ongthaycaiwin" class="w-10 h-10 rounded-full bg-black flex items-center justify-center hover:bg-white hover:text-black transition-all transform hover:scale-110 shadow-lg border border-white/20">
-                            <i class="fa-brands fa-tiktok text-white hover:text-black"></i>
+                        <a href="https://www.tiktok.com/@ongthaycaiwin" class="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center hover:bg-white hover:text-black transition-all transform hover:scale-110 shadow-lg border border-white/20">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
                         </a>
-                        <!-- Zalo Icon -->
-                        <a href="https://zaloapp.com/qr/p/xzyx8g0gmokv?src=qr" class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center hover:bg-white hover:text-blue-500 transition-all transform hover:scale-110 shadow-lg group border border-white/20">
-                            <svg class="w-5 h-5 fill-current text-white hover:text-blue-500" viewBox="0 0 614.501 613.667"><path d="M464.721,301.399c-13.984-0.014-23.707,11.478-23.944,28.312c-0.251,17.771,9.168,29.208,24.037,29.202 c14.287-0.007,23.799-11.095,24.01-27.995C489.028,313.536,479.127,301.399,464.721,301.399z"/><path d="M291.83,301.392c-14.473-0.316-24.578,11.603-24.604,29.024c-0.02,16.959,9.294,28.259,23.496,28.502 c15.072,0.251,24.592-10.87,24.539-28.707C315.214,313.318,305.769,301.696,291.83,301.392z"/><path d="M310.518,3.158C143.102,3.158,7.375,138.884,7.375,306.3s135.727,303.142,303.143,303.142 c167.415,0,303.143-135.727,303.143-303.142S477.933,3.158,310.518,3.158z M217.858,391.083 c-33.364,0.818-66.828,1.353-100.133-0.343c-21.326-1.095-27.652-18.647-14.248-36.583c21.55-28.826,43.886-57.065,65.792-85.621 c2.546-3.305,6.214-5.996,7.15-12.705c-16.609,0-32.784,0.04-48.958-0.013c-19.195-0.066-28.278-5.805-28.14-17.652 c0.132-11.768,9.175-17.329,28.397-17.348c25.159-0.026,50.324-0.06,75.476,0.026c9.637,0.033,19.604,0.105,25.304,9.789 c6.22,10.561,0.284,19.512-5.646,27.454c-21.26,28.497-43.015,56.624-64.559,84.902c-2.599,3.41-5.119,6.88-9.453,12.725 c23.424,0,44.123-0.053,64.816,0.026c8.674,0.026,16.662,1.873,19.941,11.267C237.892,379.329,231.368,390.752,217.858,391.083z M350.854,330.211c0,13.417-0.093,26.841,0.039,40.265c0.073,7.599-2.599,13.647-9.512,17.084 c-7.296,3.642-14.71,3.028-20.304-2.968c-3.997-4.281-6.214-3.213-10.488-0.422c-17.955,11.728-39.908,9.96-56.597-3.866 c-29.928-24.789-30.026-74.803-0.211-99.776c16.194-13.562,39.592-15.462,56.709-4.143c3.951,2.619,6.201,4.815,10.396-0.053 c5.39-6.267,13.055-6.761,20.271-3.357c7.454,3.509,9.935,10.165,9.776,18.265C350.67,304.222,350.86,317.217,350.854,330.211z M395.617,369.579c-0.118,12.837-6.398,19.783-17.196,19.908c-10.779,0.132-17.593-6.966-17.646-19.512 c-0.179-43.352-0.185-86.696,0.007-130.041c0.059-12.256,7.302-19.921,17.896-19.222c11.425,0.752,16.992,7.448,16.992,18.833 c0,22.104,0,44.216,0,66.327C395.677,327.105,395.828,348.345,395.617,369.579z M463.981,391.868 c-34.399-0.336-59.037-26.444-58.786-62.289c0.251-35.66,25.304-60.713,60.383-60.396c34.631,0.304,59.374,26.306,58.998,61.986 C524.207,366.492,498.534,392.205,463.981,391.868z"/></svg>
+                        <a href="https://zaloapp.com/qr/p/xzyx8g0gmokv?src=qr" class="w-11 h-11 rounded-full bg-blue-500/20 flex items-center justify-center hover:bg-white hover:text-blue-500 transition-all transform hover:scale-110 shadow-lg border border-white/20">
+                            <svg class="w-6 h-6 fill-current" viewBox="0 0 614.501 613.667"><path d="M464.721,301.399c-13.984-0.014-23.707,11.478-23.944,28.312c-0.251,17.771,9.168,29.208,24.037,29.202 c14.287-0.007,23.799-11.095,24.01-27.995C489.028,313.536,479.127,301.399,464.721,301.399z"/><path d="M291.83,301.392c-14.473-0.316-24.578,11.603-24.604,29.024c-0.02,16.959,9.294,28.259,23.496,28.502 c15.072,0.251,24.592-10.87,24.539-28.707C315.214,313.318,305.769,301.696,291.83,301.392z"/><path d="M310.518,3.158C143.102,3.158,7.375,138.884,7.375,306.3s135.727,303.142,303.143,303.142 c167.415,0,303.143-135.727,303.143-303.142S477.933,3.158,310.518,3.158z M217.858,391.083 c-33.364,0.818-66.828,1.353-100.133-0.343c-21.326-1.095-27.652-18.647-14.248-36.583c21.55-28.826,43.886-57.065,65.792-85.621 c2.546-3.305,6.214-5.996,7.15-12.705c-16.609,0-32.784,0.04-48.958-0.013c-19.195-0.066-28.278-5.805-28.14-17.652 c0.132-11.768,9.175-17.329,28.397-17.348c25.159-0.026,50.324-0.06,75.476,0.026c9.637,0.033,19.604,0.105,25.304,9.789 c6.22,10.561,0.284,19.512-5.646,27.454c-21.26,28.497-43.015,56.624-64.559,84.902c-2.599,3.41-5.119,6.88-9.453,12.725 c23.424,0,44.123-0.053,64.816,0.026c8.674,0.026,16.662,1.873,19.941,11.267C237.892,379.329,231.368,390.752,217.858,391.083z M350.854,330.211c0,13.417-0.093,26.841,0.039,40.265c0.073,7.599-2.599,13.647-9.512,17.084 c-7.296,3.642-14.71,3.028-20.304-2.968c-3.997-4.281-6.214-3.213-10.488-0.422c-17.955,11.728-39.908,9.96-56.597-3.866 c-29.928-24.789-30.026-74.803-0.211-99.776c16.194-13.562,39.592-15.462,56.709-4.143c3.951,2.619,6.201,4.815,10.396-0.053 c5.39-6.267,13.055-6.761,20.271-3.357c7.454,3.509,9.935,10.165,9.776,18.265C350.67,304.222,350.86,317.217,350.854,330.211z M395.617,369.579c-0.118,12.837-6.398,19.783-17.196,19.908c-10.779,0.132-17.593-6.966-17.646-19.512 c-0.179-43.352-0.185-86.696,0.007-130.041c0.059-12.256,7.302-19.921,17.896-19.222c11.425,0.752,16.992,7.448,16.992,18.833 c0,22.104,0,44.216,0,66.327C395.677,327.105,395.828,348.345,395.617,369.579z M463.981,391.868 c-34.399-0.336-59.037-26.444-58.786-62.289c0.251-35.66,25.304-60.713,60.383-60.396c34.631,0.304,59.374,26.306,58.998,61.986 C524.207,366.492,498.534,392.205,463.981,391.868z"/></svg>
                         </a>
                     </div>
                 </div>
             </div>
-            <div class="border-t border-blue-500 mt-10 pt-6 text-center text-sm text-white">
+            <div class="border-t border-white/20 mt-10 pt-6 text-center text-sm text-blue-200">
                 &copy; 2025 Bản quyền thuộc về Đăng Lee. Website phục vụ giáo dục phi lợi nhuận.
             </div>
         </div>
     </footer>
 
-    <!-- Script hiệu ứng hạt & Logic render -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2/tsparticles.bundle.min.js"></script>
     <script>
         const cardData = [
@@ -320,7 +315,7 @@
                 if (card.type === 'icon') {
                     iconHTML = `<i class="${card.icon} text-5xl sm:text-6xl ${iconColorClass} mb-4 grade-icon transition-colors"></i>`;
                 } else if (card.type === 'image') {
-                    iconHTML = `<img src="${card.icon}" alt="${card.title}" class="h-16 sm:h-20 mb-4 grade-icon object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML+='<i class=\\'fas fa-image text-4xl text-gray-300\\'></i>'">`;
+                    iconHTML = `<img src="${card.icon}" alt="${card.title}" class="h-16 sm:h-20 mb-4 grade-icon object-contain" onerror="this.style.display='none'; this.parentElement.innerHTML+='<i class=\\'fas fa-image text-4xl text-gray-500\\'></i>'">`;
                 }
                 
                 const isHighlight = card.highlight ? 'ring-2 ring-red-500 shadow-red-200' : '';
@@ -333,7 +328,7 @@
                             <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></div>
                             ${iconHTML}
                             <h2 class="text-lg sm:text-xl font-bold text-slate-700 group-hover:text-theme-blue transition-colors">${card.title}</h2>
-                            ${card.description ? `<p class="text-xs font-semibold text-slate-400 mt-2 group-hover:text-slate-600">${card.description}</p>` : ''}
+                            <p class="text-xs font-semibold text-slate-500 mt-2 group-hover:text-slate-700">${card.description || ''}</p>
                         </a>
                     </div>
                 `;
@@ -343,21 +338,22 @@
         window.addEventListener('load', () => {
             renderCards(); 
             
+            // Hạt màu xanh đậm bay trên nền sáng
             tsParticles.load("particles-container", {
                 fpsLimit: 60,
                 background: { color: "transparent" },
                 particles: {
-                    number: { value: 50, density: { enable: true, value_area: 800 } },
+                    number: { value: 60, density: { enable: true, value_area: 800 } },
                     color: { value: "#002060" },
                     shape: { type: "circle" },
-                    opacity: { value: 0.3, random: true },
+                    opacity: { value: 0.2, random: true },
                     size: { value: 3, random: true },
-                    links: { enable: true, distance: 150, color: "#9ca3af", opacity: 0.2, width: 1 },
+                    links: { enable: true, distance: 150, color: "#cbd5e1", opacity: 0.3, width: 1 },
                     move: { enable: true, speed: 1, direction: "none", out_mode: "out" }
                 },
                 interactivity: {
                     events: { onhover: { enable: true, mode: "bubble" }, onclick: { enable: true, mode: "push"}, resize: true },
-                    modes: { bubble: { distance: 200, size: 6, duration: 2, opacity: 0.8 }, push: { particles_nb: 4 } }
+                    modes: { bubble: { distance: 200, size: 5, duration: 2, opacity: 0.5 }, push: { particles_nb: 4 } }
                 },
                 detectRetina: true
             });
