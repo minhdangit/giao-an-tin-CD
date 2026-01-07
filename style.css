@@ -1,336 +1,135 @@
-/* === CÀI ĐẶT CHUNG & BIẾN MÀU === */
-body {
-    font-family: 'Inter', sans-serif;
-    /* Màu nền được quản lý bởi script hiệu ứng hạt */
+/* === CÀI ĐẶT CHUNG === */
+:root {
+    --theme-blue: #002060;
+    --theme-red: #C00000;
+    --gradient-bg: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
 }
 
-/* === [MỚI] CONTAINER CHO HIỆU ỨNG HẠT === */
+body {
+    font-family: 'Inter', sans-serif;
+    background: var(--gradient-bg);
+    overflow-x: hidden;
+}
+
 #particles-container {
     position: fixed;
     width: 100%;
     height: 100%;
     top: 0;
     left: 0;
-    z-index: -1; /* Đặt phía sau mọi nội dung khác */
-}
-
-
-:root {
-    --theme-blue: #002060;
-    --theme-red: #C00000;
-    --text-light: #6b7280; /* Màu chữ xám nhạt */
+    z-index: -1;
 }
 
 .text-theme-blue { color: var(--theme-blue); }
-.bg-theme-red { background-color: var(--theme-red); }
 .text-theme-red { color: var(--theme-red); }
-.bg-theme-blue { background-color: var(--theme-blue); }
-.border-theme-blue { border-color: var(--theme-blue); }
 
-
-/* === THIẾT KẾ THẺ CHỌN LỚP (GRADE CARD) === */
-.grade-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 1rem;
-    background-color: rgba(255, 255, 255, 0.85); /* Thêm độ trong suốt nhẹ */
-    backdrop-filter: blur(5px); /* Hiệu ứng mờ kính */
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 1rem;
-    border: 1px solid #e5e7eb;
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.07), 0 2px 4px -2px rgb(0 0 0 / 0.07);
-    text-decoration: none;
-    position: relative;
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-}
-.grade-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    border-color: var(--theme-blue);
-    background-color: rgba(255, 255, 255, 1);
-}
-.grade-card-icon {
-    font-size: 3.5rem;
-    color: var(--theme-blue);
-    margin-bottom: 1rem;
-    transition: transform 0.3s ease-in-out, color 0.3s ease;
-}
-.grade-card:hover .grade-card-icon {
-    transform: scale(1.15) rotate(-5deg);
-    color: var(--theme-red);
-}
-.grade-card-title {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: var(--theme-blue);
-    transition: color 0.3s ease;
+/* === HIỆU ỨNG TIKTOK === */
+@keyframes tiktok-pulse {
+    0% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
+    50% { transform: scale(1.1); filter: drop-shadow(2px 2px 0px #25F4EE) drop-shadow(-2px -2px 0px #FE2C55); }
+    100% { transform: scale(1); filter: drop-shadow(0 0 0 rgba(0,0,0,0)); }
 }
 
-
-/* === [CẬP NHẬT] THIẾT KẾ THẺ THÔNG TIN (Mục tiêu, Nội dung) === */
-.info-card {
-    background-color: #f3f4f6; /* Nền xám nhạt cho toàn bộ thẻ */
-    border-radius: 0.5rem;
-    margin-bottom: 1rem;
-    overflow: hidden; /* Ẩn phần tràn ra khi bo góc */
+.tiktok-effect {
+    animation: tiktok-pulse 2s infinite;
 }
 
-.info-card-header {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-    list-style: none;
-    font-weight: 600;
-}
-
-.info-card-header::-webkit-details-marker {
-    display: none;
-}
-
-.info-card-header .arrow {
-    transition: transform 0.2s ease-in-out;
-    color: #6b7280; /* Màu mũi tên xám */
-}
-
-.info-card[open] > .info-card-header .arrow {
-    transform: rotate(90deg);
-}
-
-.info-card-content {
-    background-color: #ffffff; /* Nền trắng cho nội dung */
-    padding: 1rem;
-    color: #374151;
-    line-height: 1.6;
-    border-top: 1px solid #e5e7eb; /* Đường kẻ phân cách */
-}
-
-
-/* === CÁC PHẦN CSS KHÁC CHO TRANG CHI TIẾT === */
-
-.lesson-link { 
-    position: relative;
-    transition: all 0.3s ease-in-out;
-    cursor: pointer;
-    background-color: white;
-    border: 1px solid #e5e7eb;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-    padding: 1rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-.lesson-link:hover { 
-    transform: translateY(-4px); 
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-    border-color: var(--theme-blue);
-}
-
-.slide-icon {
-    position: absolute;
-    top: 0.5rem;
-    right: 0.5rem;
-    width: 2rem;
-    height: 2rem;
-    background-color: rgba(0, 32, 96, 0.7);
-    color: white;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.875rem;
-    opacity: 0;
-    transform: scale(0.8);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 10;
-}
-.lesson-link:hover .slide-icon {
-    opacity: 1;
-    transform: scale(1);
-}
-.slide-icon:hover {
-    background-color: var(--theme-red);
-    transform: scale(1.1) rotate(5deg) !important;
-}
-
-.tab-buttons {
-    display: flex;
-    border-bottom: 2px solid #e5e7eb;
-}
-.tab-button {
-    padding: 0.75rem 1.5rem;
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-    font-weight: 600;
-    color: #6b7280;
-    margin-bottom: -2px;
-}
-.tab-button:hover {
-    color: var(--theme-blue);
-    background-color: #f9fafb;
-}
-.tab-button.active {
-    color: var(--theme-blue);
-    border-bottom-color: var(--theme-red);
-}
-.tab-content {
-    display: none;
-    padding: 1.5rem;
-    background-color: white;
-    border: 1px solid #e5e7eb;
-    border-top: none;
-    border-radius: 0 0 0.5rem 0.5rem;
-}
-.tab-content.active { display: block; }
-
-.video-container {
-    position: relative;
-    padding-bottom: 56.25%;
-    height: 0;
-    overflow: hidden;
-    width: 100%;
-    border-radius: 0.5rem;
-}
-.video-container iframe {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
+/* === THẺ HỌC TẬP KIỂU GAME (GRADE CARD NEW) === */
+.grade-card-container {
+    perspective: 1000px; /* Tạo chiều sâu 3D */
     height: 100%;
 }
 
-.consolidation-section { margin-bottom: 1.5rem; }
-.consolidation-title {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--theme-blue);
-    border-bottom: 2px solid #e5e7eb;
-    padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-.consolidation-content ul {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-    color: #374151;
-}
-
-.quiz-option {
-    display: block;
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 10px;
-    border: 2px solid #e5e7eb;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-align: left;
-    background-color: white;
-}
-.quiz-option:hover:not([disabled]) {
-    border-color: var(--theme-blue);
-    background-color: #f0f9ff;
-}
-.quiz-option.selected {
-    border-color: #3b82f6;
-    background-color: #eff6ff;
-    font-weight: 600;
-}
-.quiz-option.correct {
-    border-color: #22c55e !important;
-    background-color: #dcfce7 !important;
-    color: #166534;
-}
-.quiz-option.incorrect {
-    border-color: #ef4444 !important;
-    background-color: #fee2e2 !important;
-    color: #991b1b;
-}
-.quiz-option:disabled {
-    cursor: not-allowed;
-    opacity: 0.8;
-}
-
-.qr-card img {
-    /* Thêm transition cho ảnh QR */
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.qr-card:hover img {
-    /* Phóng to ảnh và thêm bóng đổ để nổi bật */
-    transform: scale(1.15);
-    box-shadow: 0 15px 30px -5px rgba(0, 32, 96, 0.25);
-}
-
-/* === THẺ THÔNG TIN LIÊN HỆ === */
-.contact-card:hover {
-    cursor: default;
-    transform: translateY(-8px);
-    box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-    border-color: var(--theme-blue);
-}
-.contact-card .contact-details {
-    text-align: left;
-    width: 100%;
-    font-size: 0.875rem; /* 14px */
-    color: #374151;
-    line-height: 1.8;
-}
-.contact-card .contact-details p {
+.grade-card-new {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    margin-bottom: 0.25rem;
-}
-.contact-card .contact-details .fa-fw {
-    color: var(--theme-blue);
-    margin-right: 0.75rem;
-}
-.contact-card .contact-details a {
-    color: inherit;
+    justify-content: center;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Hiệu ứng nhún nhảy */
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
     text-decoration: none;
-    transition: color 0.3s ease;
-}
-.contact-card .contact-details a:hover {
-    color: var(--theme-red);
-    text-decoration: underline;
 }
 
-/* === [MỚI] HIỆU ỨNG NỔI BẬT (HIGHLIGHT) === */
-@keyframes pulse-badge {
-    0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(192, 0, 0, 0.7); }
-    70% { transform: scale(1.1); box-shadow: 0 0 0 6px rgba(192, 0, 0, 0); }
-    100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(192, 0, 0, 0); }
+/* Hiệu ứng khi rê chuột vào thẻ */
+.grade-card-new:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.95);
+    border-color: var(--theme-blue);
+    box-shadow: 0 20px 25px -5px rgba(0, 32, 96, 0.15), 0 8px 10px -6px rgba(0, 32, 96, 0.1);
 }
 
-.badge-hot {
+.grade-card-new:hover .grade-icon {
+    transform: scale(1.15) rotate(-8deg);
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
+}
+
+.grade-icon {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Hiệu ứng ánh sáng quét qua (Shine Effect) */
+.grade-card-new::after {
+    content: '';
     position: absolute;
-    top: -10px;
-    right: -10px;
-    background-color: var(--theme-red);
+    top: 0;
+    left: -100%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.6), transparent);
+    transform: skewX(-25deg);
+    transition: 0.5s;
+    pointer-events: none;
+}
+
+.grade-card-new:hover::after {
+    left: 125%;
+    transition: 0.7s ease-in-out;
+}
+
+/* === HUY HIỆU (BADGE) === */
+.badge-hot-new {
+    background: linear-gradient(45deg, #FF416C, #FF4B2B);
     color: white;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 800;
-    padding: 0.35rem 0.75rem;
-    border-radius: 9999px;
-    z-index: 20;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    box-shadow: 0 2px 5px rgba(255, 75, 43, 0.4);
+    animation: pulse-badge 1.5s infinite;
+    z-index: 10;
     text-transform: uppercase;
-    border: 2px solid white;
-    animation: pulse-badge 2s infinite; /* Hiệu ứng nhịp tim */
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
 }
 
-/* Thẻ được highlight sẽ có viền màu và nền sáng hơn */
-.card-highlighted {
-    border: 2px solid var(--theme-red) !important;
-    background-color: rgba(255, 255, 255, 0.95) !important;
+@keyframes pulse-badge {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
 }
 
-.card-highlighted .text-slate-800 {
-    color: var(--theme-red) !important; /* Đổi màu tiêu đề sang đỏ */
-}
+/* === CSS CŨ CHO CÁC TRANG CON (GIỮ LẠI ĐỂ KHÔNG LỖI) === */
+.info-card { background-color: #f3f4f6; border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+.info-card-header { display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem; cursor: pointer; list-style: none; font-weight: 600; }
+.info-card-header::-webkit-details-marker { display: none; }
+.info-card-content { background-color: #ffffff; padding: 1rem; border-top: 1px solid #e5e7eb; }
+.lesson-link { padding: 1rem; border: 1px solid #e5e7eb; border-radius: 0.5rem; text-align: center; cursor: pointer; transition: all 0.3s; }
+.lesson-link:hover { border-color: var(--theme-blue); transform: translateY(-2px); }
+.tab-buttons { display: flex; border-bottom: 2px solid #e5e7eb; }
+.tab-button { padding: 0.75rem 1.5rem; cursor: pointer; font-weight: 600; color: #6b7280; }
+.tab-button.active { color: var(--theme-blue); border-bottom: 3px solid var(--theme-red); margin-bottom: -2px; }
+.tab-content { display: none; padding: 1.5rem; background: white; border: 1px solid #e5e7eb; border-top: none; }
+.tab-content.active { display: block; }
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 0.5rem; background: #000; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
